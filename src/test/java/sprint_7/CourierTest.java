@@ -1,8 +1,12 @@
 package sprint_7;
 
 import clients.CourierClients;
+import io.restassured.RestAssured;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import org.hamcrest.Matchers;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import pojo.CreateCourierRequest;
 import pojo.LoginCourierRequest;
@@ -13,6 +17,10 @@ import static io.restassured.RestAssured.given;
 public class CourierTest {
     private CourierClients courierClients = new CourierClients();
     private int id;
+    @Before
+    public void setUp() {
+        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
+    }
 
     @Test
     public void corierShouldBeCreated() {
@@ -39,3 +47,4 @@ public class CourierTest {
                 .statusCode(200);
     }
 }
+//to be continued
